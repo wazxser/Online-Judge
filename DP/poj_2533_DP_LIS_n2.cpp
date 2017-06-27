@@ -14,6 +14,7 @@ int n;
 int a[MAX];
 int b[MAX];
 
+
 int main(){
     int max;
     scanf("%d",&n);
@@ -32,7 +33,7 @@ int main(){
             }
         }
         b[i] = max+1;
-    }
+    }   
 
     sort(b, b+n, compare);
 

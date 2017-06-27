@@ -73,7 +73,6 @@ int main(){
 
         printf("%d\n", bfs());
     }
-
-
+	
     return 0;
 }
