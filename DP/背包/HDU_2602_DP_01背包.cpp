@@ -5,6 +5,9 @@
 
 using namespace std;
 
+//01背包，二维的，不记了。。。
+//一维的递推公式：dp[j] = max(dp[j], dp[j-w[i]]+v[i])
+
 int dp[1010][1010], val[1010], vol[1010];
 
 int main(){
@@ -37,13 +40,6 @@ int main(){
                 }
             }
         }
-
-//        for(int i = 0; i < num; i++){
-//            for(int j = 0; j < volume; j++){
-//                cout << dp[i][j] << " ";
-//            }
-//            cout << endl;
-//        }
         printf("%d\n", dp[num][volume]);
     }
 

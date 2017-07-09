@@ -1,4 +1,8 @@
 #include <cstdio>
+
+//题意：三种颜色涂色，相邻不同颜色，首尾不同色，多少种涂色方案
+//看成一个环，相邻不同色
+
 typedef long long ll;
 ll dp[55];
 

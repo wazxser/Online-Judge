@@ -24,7 +24,6 @@ void tree(int left, int right, char ch){
             break;
         }
     }
-
 }
 
 int main(){
@@ -33,5 +32,6 @@ int main(){
         tree(0, strlen(pre), pre[root++]);
         printf("\n");
     }
+	
     return 0;
 }

@@ -5,6 +5,11 @@
 using namespace std;
 #define INF 99999
 
+//dijks，单源最短路径，复杂度O(n2)，权值必须为正，邻接矩阵存储图，visit数组记录已访问过的点
+//dis数组记录从源点到各点的最短距离
+//每次寻找
+//用memset初始化二维数组时，会Runtime error
+
 int m[110][110];
 int visit[110];
 int dis[110];
@@ -15,9 +20,6 @@ void dijks(int n, int s){
     for(int i = 1; i <= n; i++){
         dis[i] = m[s][i];
     }
-
-//    for(int i = 0; i <= n; i++)
-//        cout << dis[i] << endl;
 
     for(int i = 0; i < n; i++){
         minn = INF;

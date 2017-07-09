@@ -52,6 +52,7 @@ int main(){
             scanf("%d", ki+i);
         }
         memset(visit, 0, sizeof(visit));
+		//清空队列，很重要
         while(!q.empty()){
             q.pop();
         }
@@ -62,5 +63,6 @@ int main(){
         visit[a] = 1;
         printf("%d\n", bfs());
     }
+	
     return 0;
 }

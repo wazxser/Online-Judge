@@ -4,11 +4,15 @@
 
 using namespace std;
 
+//克鲁斯卡尔+并查集
+
 struct edge{
     int v1;
     int v2;
     int w;
 }Edge[55000];
+
+//表示连通性的数组，数组索引和数组元素相连，初始化为自己与自己相连
 int vset[55000];
 
 //bool cmp(edge ed1, edge ed2){
@@ -18,6 +22,7 @@ int vset[55000];
 bool operator <(const edge &e1, const edge &e2){
     return e1.w < e2.w;
 }
+
 
 int getparent(int ch){
     if(vset[ch] != ch)
