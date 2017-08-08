@@ -8,7 +8,7 @@ using namespace std;
 
 //最大上升子序列的和，查找子序列为上升序列，并且和为最大的，最后输出最大的和
 //dp数组维护上升序列的和
-//注意检查当前元素和之前元素和那个值更大的问题
+//注意检查当前元素和之前元素和哪个值更大的问题
 
 bool compare(int num1, int num2){
     return num1 > num2;

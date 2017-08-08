@@ -2,6 +2,7 @@
 #include <cstdio>
 #include <cmath>
 #include <algorithm>
+//#include <memory.h>
 #define INF 1000000
 using namespace std;
 
@@ -21,7 +22,10 @@ int main() {
 		scanf("%d", &n);
 		sum = f - e;
 
-		memset(dp, INF, sizeof(dp));
+//		memset(dp, INF, sizeof(dp));
+        for(int i = 0; i < 50011; i++){
+            dp[i] = INF;
+        }
 
 		for (int i = 0; i < n; i++) {
 			scanf("%d %d", v + i, w + i);
