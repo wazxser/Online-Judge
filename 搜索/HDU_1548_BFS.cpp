@@ -52,7 +52,7 @@ int main(){
             scanf("%d", ki+i);
         }
         memset(visit, 0, sizeof(visit));
-		//清空队列，很重要
+		//清空队列
         while(!q.empty()){
             q.pop();
         }
