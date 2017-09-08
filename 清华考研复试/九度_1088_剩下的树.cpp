@@ -8,21 +8,6 @@ int L, M;
 int lu[10010];
 int res;
 
-//int cov(int a1, int a2, int b1, int b2){
-//    if(a1 <= b1 && a2 >= b2){
-//        return 0;
-//    }
-//    else if(a1 <= b1 && a2 <= b2 && b1 < a2){
-//        return b2 - a2;
-//    }
-//    else if(a1 >= b1 && a2 <= b2)
-//        return a1 - b1 + b2 - a2;
-//    else if(b1 <= a1 && b2 >= a1 && b2 <= a2)
-//        return a1 - b1;
-//    else
-//        return -1;
-//}
-
 int main(){
     while(~scanf("%d %d", &L, &M)){
         for(int i = 0; i <= L; i++){

@@ -7,17 +7,17 @@ int t, a, n, num1, num2;
 int c[100010];
 char cmd[20];
 
-int lowbit(int x) {
+int lowbit(int x){
 	return x & (-x);
 }
 
-void add(int i, int a) {
+void add(int i, int a){
 	for (; i <= n; i += lowbit(i))
 		c[i] += a;
 }
 
 //求和是从这个数往前加，1到这个数本身位置的和
-int sum(int a) {
+int sum(int a){
 	int res = 0;
 	for (; a > 0; a -= lowbit(a))
 		res += c[a];
