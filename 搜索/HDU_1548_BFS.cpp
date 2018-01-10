@@ -1,44 +1,48 @@
 #include <iostream>
 #include <cstdio>
-#include <memory.h>
-#include <cstring>
-#include <cmath>
 #include <queue>
-typedef long long ll;
+#include <memory.h>
+
 using namespace std;
 
-struct node{
-    int x;
-    int step;
-} Node;
-
+int num[210];
+int visit[210];
 int n, a, b;
-int ki[210], visit[210];
+struct node{
+    int no;
+    int step;
+}Node[210];
+
 queue<node> q;
 
-bool check(int x){
-    if(x < 1 || x > n)
-        return true;
-    else
-        return false;
+int check(int x){
+    if(x >= 1 && x <= n){
+        return 1;
+    }
+    else{
+        return 0;
+    }
 }
 
 int bfs(){
-    node next, p;
     while(!q.empty()){
-        p = q.front();
+        node no2;
+        no2 = q.front();
         q.pop();
-        if(p.x == b)
-            return p.step;
-        for(int i = -1; i <= 1; i+=2){
-            next = p;
-            next.x += i*ki[next.x];
-            if(check(next.x) || visit[next.x]){
-                continue;
+
+        if(no2.no == b){
+            return no2.step;
+        }
+
+        for(int i = -1; i <= 1; i += 2){
+            int temp = no2.no + i*num[no2.no-1];
+            if(check(temp) && !visit[temp]){
+                node no3;
+                no3.no = temp;
+                no3.step = no2.step+1;
+                visit[temp] = 1;
+                q.push(no3);
             }
-            visit[next.x] = 1;
-            next.step++;
-            q.push(next);
         }
     }
 
@@ -46,23 +50,29 @@ int bfs(){
 }
 
 int main(){
-    while(~scanf("%d", &n), n){
-        scanf("%d%d", &a, &b);
-        for(int i = 1; i <= n; i++){
-            scanf("%d", ki+i);
+    while(~scanf("%d", &n)){
+        if(n == 0){
+            break;
         }
-        memset(visit, 0, sizeof(visit));
-		//清空队列
+
+        scanf("%d%d", &a, &b);
+        for(int i = 0; i < n; i++){
+            scanf("%d", num+i);
+        }
+
         while(!q.empty()){
             q.pop();
         }
+        memset(visit, 0, sizeof visit);
+
         node no;
-        no.x = a;
+        no.no = a;
         no.step = 0;
         q.push(no);
         visit[a] = 1;
+
         printf("%d\n", bfs());
     }
-	
+
     return 0;
 }

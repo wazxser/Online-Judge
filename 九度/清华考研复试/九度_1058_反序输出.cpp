@@ -5,7 +5,6 @@
 using namespace std;
  
 char str[10];
-//vector<char> str;
  
 int main(){
     while(~scanf("%s", &str)){

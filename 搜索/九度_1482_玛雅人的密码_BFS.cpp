@@ -41,13 +41,13 @@ int bfs(){
             temp[i] = temp[i+1];
             temp[i+1] = ch;
 
-//            if(m.find(temp) == m.end()){
-//                node bnode;
-//                bnode.str = temp;
-//                bnode.step = anode.step + 1;
-//                q.push(bnode);
-//                m[bnode.str] = size++;
-//            }
+            if(m.find(temp) == m.end()){
+                node bnode;
+                bnode.str = temp;
+                bnode.step = anode.step + 1;
+                q.push(bnode);
+                m[bnode.str] = size++;
+            }
         }
     }
 
@@ -64,7 +64,7 @@ int main(){
             q.pop();
         }
         m.clear();
-//        cout << s.length() << s.size() << endl;
+
         node no;
         no.str = s;
         no.step = 0;

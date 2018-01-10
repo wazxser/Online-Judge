@@ -1,32 +1,3 @@
-//#include <iostream>
-//#include <cstdio>
-//#include <cstring>
-//
-//using namespace std;
-//
-//char pre[30];
-//char mid[30];
-//
-//void tree(int left, int right, char ch){
-//    for(int i = left; i < right; i++){
-//        if(mid[i] == ch){
-//            if(left < i){
-//                tree(left, i, pre[i]);
-//            }
-//
-//            if(i < right){
-//                tree(i+1, right, )
-//            }
-//        }
-//    }
-//}
-//
-//int main(){
-//    while(~scanf("%s %s", pre, mid)){
-//        int root = 0;
-//
-//    }
-//}
 #include <iostream>
 #include <cstdio>
 #include <cstring>
@@ -38,9 +9,6 @@ using namespace std;
 int t, n, m;
 int biao[110][2];
 int a, b, c, x, y;
-//struct biao{
-//    int x, y;
-//}Biao[110];
 
 struct node{
     int v1;
@@ -120,5 +88,6 @@ int main(){
             printf("oh!\n");
         }
     }
+	
     return 0;
 }
