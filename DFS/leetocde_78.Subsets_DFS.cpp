@@ -1,3 +1,6 @@
+//这道题的题意是给出一个数组得所有子集，包括空集和本身
+//用DFS搜索，按序遍历数组的每一个元素，再dfs搜索包括该元素的所有可能子集
+
 class Solution {
 public:
     void dfs(vector<int> &temp, vector<int> nums, vector<vector<int>> &res, int index){
