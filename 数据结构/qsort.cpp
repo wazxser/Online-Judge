@@ -3,54 +3,41 @@
 
 using namespace std;
 
-int num[110];
-int n;
-
-void swap2(int index1, int index2){
-    int temp = num[index1];
-    num[index1] = num[index2];
-    num[index2] = temp;
-}
-
-int partit(int low, int high){
-    int part = num[low];
+int part(int arr[], int low, int high){
+    int pivot = arr[low];
     while(low < high){
-        while(low < high && num[high] >= part){
+        while(low < high && arr[high] >= pivot)
             high--;
-        }
-        swap2(low, high);
-
-        while(low < high && num[low] <= part){
+        arr[low] = arr[high];
+        while(low < high && arr[low] <= pivot)
             low++;
-        }
-
-        swap2(low, high);
+        arr[high] = arr[low];
     }
+
+    arr[low] = pivot;
 
     return low;
 }
 
-void qs(int low, int high){
-    int partloc;
+void qsort(int arr[], int low, int high){
     if(low < high){
-        partloc = partit(low, high);
-
-        qs(low, partloc-1);
-        qs(partloc+1, high);
+        int loc = part(arr, low, high);
+        qsort(arr, low, loc-1);
+        qsort(arr, loc+1, high);
     }
 }
 
 int main(){
-    while(~scanf("%d", &n)){
-        for(int i = 0; i < n; i++){
-            scanf("%d", num+i);
-        }
-
-        qs(0, n-1);
-
-        for(int i = 0; i < n; i++){
-            printf("%d ", num[i]);
-        }
-        printf("\n");
+    int arr[8];
+    for(int i = 0; i < 8; i++){
+        scanf("%d", &arr[i]);
     }
+
+    qsort(arr, 0, 7);
+
+    for(int i = 0; i < 8; i++){
+        printf("%d ", arr[i]);
+    }
+
+    return 0;
 }
