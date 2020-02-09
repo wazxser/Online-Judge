@@ -32,7 +32,8 @@
 
 
 ## 字符串
-
+#### 5.Longest Palindromic Substring 最长回文子串
+给一个字符串s，给出s中的最长回文子串。
 
 ## 滑动窗口
 #### 3. Longest Substring Without Repeating Characters 最长无重复子串
