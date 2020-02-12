@@ -1,3 +1,16 @@
+[数组](https://github.com/wazxser/Online-Judge/blob/master/leetcode/README.md#数组)
+[数字](https://github.com/wazxser/Online-Judge/blob/master/leetcode/README.md#数字)
+[链表](https://github.com/wazxser/Online-Judge/blob/master/leetcode/README.md#链表)
+[二叉树](https://github.com/wazxser/Online-Judge/blob/master/leetcode/README.md#二叉树)
+[字符串](https://github.com/wazxser/Online-Judge/blob/master/leetcode/README.md#字符串)
+[滑动窗口](https://github.com/wazxser/Online-Judge/blob/master/leetcode/README.md#滑动窗口)
+[哈希](https://github.com/wazxser/Online-Judge/blob/master/leetcode/README.md#哈希)
+[动态规划](https://github.com/wazxser/Online-Judge/blob/master/leetcode/README.md#动态规划)
+[回溯](https://github.com/wazxser/Online-Judge/blob/master/leetcode/README.md#回溯)
+[数据结构](https://github.com/wazxser/Online-Judge/blob/master/leetcode/README.md#数据结构)
+
+
+
 ## 数组
 #### 剑指 最小的k个数
 输入n个整数，找出其中最小的K个数。例如输入4,5,1,6,2,7,3,8这8个数字，则最小的4个数字是1,2,3,4,。
@@ -55,7 +68,7 @@ void reOrderArray(vector<int> &array) {
 顺着乘一遍，倒着乘一遍
 
 #### 剑指 整数中1出现的次数 （从1到n整数中1出现的次数）
-求出1~13的整数中1出现的次数,并算出100~1300的整数中1出现的次数？为此他特别数了一下1~13中包含1的数字有1、10、11、12、13因此共出现6次,但是对于后面问题他就没辙了。ACMer希望你们帮帮他,并把问题更加普遍化,可以很快的求出任意非负整数区间中1出现的次数（从1 到 n 中1出现的次数）。
+求出1\~13的整数中1出现的次数,并算出100\~1300的整数中1出现的次数？为此他特别数了一下1\~13中包含1的数字有1、10、11、12、13因此共出现6次,但是对于后面问题他就没辙了。ACMer希望你们帮帮他,并把问题更加普遍化,可以很快的求出任意非负整数区间中1出现的次数（从1 到 n 中1出现的次数）。
 
 ```
 int NumberOf1Between1AndN_Solution(int n)
