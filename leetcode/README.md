@@ -18,6 +18,27 @@
 输入n个整数，找出其中最小的K个数。例如输入4,5,1,6,2,7,3,8这8个数字，则最小的4个数字是1,2,3,4,。
 
 
+#### 连续子数组的最大和
+给一个数组，返回它的最大连续子序列的和
+
+#### 53. 最大子序和
+```
+int FindGreatestSumOfSubArray(vector<int> array) {
+        if(array.size() == 0){
+            return 0;
+        }
+        
+        int res = array[0];
+        int temp = array[0];
+        for(int i = 1; i < array.size(); i++){
+            temp = max(temp + array[i], array[i]);
+            res = max(res, temp);
+        }
+        
+        return res;
+    }
+```
+
 #### 1. Two Sum 
 给一个数组和数字，给出数组中两个元素相加和为指定数字的索引，假定只有唯一解。数组未排序。
 
@@ -100,6 +121,8 @@
 
 二分查找，如果arr[mid] > arr[left]，最小值在右边，left = mid+1； 如果arr[mid] < arr[left]，最小值在左边，right = mid；相等，left++。
 
+#### 33. 搜索旋转排序数组
+
 #### 287. Find the Duplicate Number 找出数组中重复的数字
 给一个数组长度为n，一共包括n+1个数字，数组中元素取值范围为1~n，找出数组中唯一重复的数字。
 
@@ -152,12 +175,33 @@ int NumberOf1Between1AndN_Solution(int n)
 }
 ```
 
+#### 48. 旋转图像
+给定一个 n × n 的二维矩阵表示一个图像。将图像顺时针旋转 90 度。
 
+找旋转前和旋转后的索引关系
+
+```
+void rotate(vector<vector<int>>& matrix) {
+  for(int i = 0, temp = 0, n = matrix.size()-1; i <= n/2; i++){
+      for(int j = i; j < n-i; j++){
+          temp = matrix[j][n-i];
+          matrix[j][n-i] = matrix[i][j];
+          matrix[i][j] = matrix[n-j][i];
+          matrix[n-j][i] = matrix[n-i][n-j];
+          matrix[n-i][n-j] = temp;
+      }
+  }
+}
+```
 
 #### 剑指 数字在排序数组中出现的次数
 统计一个数字在排序数组中出现的次数。
 
 分别二分查找该数字第一次出现的位置和最后一次出现的位置。
+
+#### 34. 在排序数组中查找元素的第一个位置和最后一个位置
+
+一次二分查找，找到该元素的一个位置后，再找它的第一个位置和最后一个位置
 
 #### 剑指 数组中的逆序对
 在数组中的两个数字，如果前面一个数字大于后面的数字，则这两个数字组成一个逆序对。输入一个数组,求出这个数组中的逆序对的总数P。并将P对1000000007取模的结果输出。 即输出P%1000000007
@@ -274,6 +318,10 @@ int Add(int num1, int num2)
 
 二进制异或相当于计算不进位的二进制加法，相与再左移一位，相当于计算进位。
 
+#### 31. 下一个排列
+实现获取下一个排列的函数，算法需要将给定数字序列重新排列成字典序中下一个更大的排列。如果不存在下一个更大的排列，则将数字重新排列成最小的排列（即升序排列）。必须原地修改，只允许使用额外常数空间。
+
+
 
 ## 链表
 #### 剑指 两个链表的第一个公共结点
@@ -322,10 +370,15 @@ int Add(int num1, int num2)
 
 三个指针，一次循环
 
-#### 合并两个排序的链表
+#### 剑指 合并两个排序的链表
 输入两个单调递增的链表，输出两个链表合成后的链表，当然我们需要合成后的链表满足单调不减规则。
 
 三个指针
+
+#### 23. 合并K个排序的链表
+合并 k 个排序链表，返回合并后的排序链表。请分析和描述算法的复杂度。
+
+分治，两两合并
 
 #### 剑指 从尾到头打印链表
 输入一个链表，按链表从尾到头的顺序返回一个ArrayList。
@@ -336,6 +389,10 @@ int Add(int num1, int num2)
 输入一个链表，输出该链表中倒数第k个结点。
 
 两个指针，一个先走k步
+
+#### 19. 删除链表的倒数第N个结点
+给定一个链表，删除链表的倒数第 n 个节点，并且返回链表的头结点。
+
 
 #### 剑指 复杂链表的复制
 输入一个复杂链表（每个节点中有节点值，以及两个指针，一个指向下一个节点，另一个特殊指针指向任意一个节点），返回结果为复制后复杂链表的head。（注意，输出结果中请不要返回参数中的节点引用，否则判题程序会直接返回空）
@@ -427,6 +484,10 @@ int Add(int num1, int num2)
 #### 剑指 字符串的排列 全排列
 输入一个字符串,按字典序打印出该字符串中字符的所有排列。例如输入字符串abc,则打印出由字符a,b,c所能排列出来的所有字符串abc,acb,bac,bca,cab和cba。
 
+#### 46. 全排列
+给定一个没有重复数字的序列，返回其所有可能的全排列。
+
+
 
 #### leetcode 72. Edit Distance 编辑距离
 计算从一个字符串变为另外一个字符串所需要的最小操作数，操作包括增加，删除，替换
@@ -451,6 +512,7 @@ int Add(int num1, int num2)
 LL今天心情特别好,因为他去买了一副扑克牌,发现里面居然有2个大王,2个小王(一副牌原本是54张)，他随机从中抽出了5张牌,想测测自己的手气,看看能不能抽到顺子,如果抽到的话,他决定去买体育彩票,嘿嘿！！“红心A,黑桃3,小王,大王,方片5”,“Oh My God!”不是顺子.....LL不高兴了,他想了想,决定大\小 王可以看成任何数字,并且A看作1,J为11,Q为12,K为13。上面的5张牌就可以变成“1,2,3,4,5”(大小王分别看作2和4),“So Lucky!”。LL决定去买体育彩票啦。 现在,要求你使用这幅牌模拟上面的过程,然后告诉我们LL的运气如何， 如果牌能组成顺子就输出true，否则就输出false。为了方便起见,你可以认为大小王是0。
 
 用num记录numbers[i] - numbers[i-1]，遇到大小王num++。
+
 
 
 ## 滑动窗口
@@ -511,6 +573,69 @@ dp[n] = max(temp, dp[i-j] * dp[j])
 #### 剑指 矩阵中的路径
 请设计一个函数，用来判断在一个矩阵中是否存在一条包含某字符串所有字符的路径。路径可以从矩阵中的任意一个格子开始，每一步可以在矩阵中向左，向右，向上，向下移动一个格子。如果一条路径经过了矩阵中的某一个格子，则该路径不能再进入该格子。 
 
+#### 39. 组合总和
+给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。
+candidates 中的数字可以无限制重复被选取。
+
+#### 17. 电话号码的字母组合
+给定一个仅包含数字 2-9 的字符串，返回所有它能表示的字母组合。
+给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。
+
+```
+void dfs(string digits, int level, vector<string> &res, string dict[], string out){
+        if(level == digits.size()) 
+            res.push_back(out);
+        else{
+            int index = digits[level] - '2';
+            string str = dict[index];
+            for(int i = 0; i < str.length(); i++){
+                out.push_back(str[i]);
+                dfs(digits, level+1, res, dict, out);
+                out.pop_back();
+            }
+        }
+    }
+    
+    vector<string> letterCombinations(string digits) {
+        vector<string> res;
+        if(digits == ""){
+            return res;
+        }
+        string dict[] = {"abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+        dfs(digits, 0, res, dict, "");
+        return res;
+    }
+```
+
+#### 22. 括号生成
+给出 n 代表生成括号的对数，请你写出一个函数，使其能够生成所有可能的并且有效的括号组合。
+
+```
+class Solution {
+public:
+    vector<string> generateParenthesis(int n) {
+        vector<string> res;
+        if(n==0)
+            return res;
+        dfs(n, n, "", res);
+        return res;
+    }
+    
+    void dfs(int a, int b, string out, vector<string>& res){
+        if(a > b){
+            return;
+        }
+        if(a == 0 && b == 0)
+            res.push_back(out);
+        else{
+            if(a > 0)
+                dfs(a-1, b, out+"(", res);
+            if(b > 0)
+                dfs(a, b-1, out+")", res);
+        }
+    }
+};
+```
 
 
 ## 数据结构
@@ -529,3 +654,168 @@ dp[n] = max(temp, dp[i-j] * dp[j])
 
 两个优先队列
 
+#### 32. 最长有效括号
+给定一个只包含 '(' 和 ')' 的字符串，找出最长的包含有效括号的子串的长度。
+
+栈
+
+#### 146. LRU缓存机制
+运用你所掌握的数据结构，设计和实现一个  LRU (最近最少使用) 缓存机制。它应该支持以下操作： 获取数据 get 和 写入数据 put 。
+
+获取数据 get(key) - 如果密钥 (key) 存在于缓存中，则获取密钥的值（总是正数），否则返回 -1。
+写入数据 put(key, value) - 如果密钥不存在，则写入其数据值。当缓存容量达到上限时，它应该在写入新数据之前删除最近最少使用的数据值，从而为新的数据值留出空间。
+
+进阶:
+
+你是否可以在 O(1) 时间复杂度内完成这两种操作？
+
+示例:
+
+LRUCache cache = new LRUCache( 2 /* 缓存容量 */ );
+
+cache.put(1, 1);
+
+cache.put(2, 2);
+
+cache.get(1);       // 返回  1
+
+cache.put(3, 3);    // 该操作会使得密钥 2 作废
+
+cache.get(2);       // 返回 -1 (未找到)
+
+cache.put(4, 4);    // 该操作会使得密钥 1 作废
+
+cache.get(1);       // 返回 -1 (未找到)
+
+cache.get(3);       // 返回  3
+
+cache.get(4);       // 返回  4
+
+```
+class LRUCache {
+public:
+    LRUCache(int capacity) {
+        cap = capacity;
+    }
+    
+    int get(int key) {
+        auto it = m.find(key);
+        if(it == m.end())
+            return -1;
+        l.splice(l.begin(), l, it->second);
+        return it->second->second;
+        
+    }
+    
+    void put(int key, int value) {
+        auto it = m.find(key);
+        if(it != m.end()){
+            l.erase(it->second);
+        }
+        
+        l.push_front(make_pair(key, value));
+        m[key] = l.begin();
+        if(m.size() > cap){
+            int k = l.rbegin()->first;
+            l.pop_back();
+            m.erase(k);
+        }
+    }
+    
+    int cap;
+    unordered_map<int, list<pair<int, int>>::iterator > m;
+    list<pair<int, int>> l;
+};
+
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * LRUCache* obj = new LRUCache(capacity);
+ * int param_1 = obj->get(key);
+ * obj->put(key,value);
+ */
+```
+
+#### 208 实现Trie（前缀树）
+实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作。
+
+示例:
+
+Trie trie = new Trie();
+
+trie.insert("apple");
+
+trie.search("apple");   // 返回 true
+
+trie.search("app");     // 返回 false
+
+trie.startsWith("app"); // 返回 true
+
+trie.insert("app");   
+
+trie.search("app");     // 返回 true
+
+```
+class TrieNode{
+public:
+    TrieNode * child[26];
+    bool isword;
+    TrieNode(){
+        isword = false;
+        for(auto &a : child)
+            a = nullptr;
+    }
+};
+
+class Trie {
+public:
+    /** Initialize your data structure here. */
+    Trie() {
+        root = new TrieNode();
+    }
+    
+    /** Inserts a word into the trie. */
+    void insert(string word) {
+        TrieNode * p = root;
+        for(auto &a : word){
+            int i = a - 'a';
+            if (!p->child[i]) 
+                p->child[i] = new TrieNode();
+            p = p->child[i];
+        }
+        p->isword = true;
+    }
+    
+    /** Returns if the word is in the trie. */
+    bool search(string word) {
+        TrieNode *p = root;
+        for (auto &a : word) {
+            int i = a - 'a';
+            if (!p->child[i]) 
+                return false;
+            p = p->child[i];
+        }
+        return p->isword;
+    }
+    
+    /** Returns if there is any word in the trie that starts with the given prefix. */
+    bool startsWith(string prefix) {
+        TrieNode *p = root;
+        for (auto &a : prefix) {
+            int i = a - 'a';
+            if (!p->child[i]) return false;
+            p = p->child[i];
+        }
+        return true;
+    }
+private:
+    TrieNode * root;
+};
+
+/**
+ * Your Trie object will be instantiated and called as such:
+ * Trie* obj = new Trie();
+ * obj->insert(word);
+ * bool param_2 = obj->search(word);
+ * bool param_3 = obj->startsWith(prefix);
+ */
+```
