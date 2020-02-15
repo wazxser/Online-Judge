@@ -215,6 +215,32 @@ void rotate(vector<vector<int>>& matrix) {
 #### 剑指 顺时针打印矩阵
 输入一个矩阵，按照从外向里以顺时针的顺序依次打印出每一个数字，例如，如果输入如下4 X 4矩阵： 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 则依次打印出数字1,2,3,4,8,12,16,15,14,13,9,5,6,7,11,10.
 
+#### 55. 跳跃游戏
+给定一个非负整数数组，你最初位于数组的第一个位置。数组中的每个元素代表你在该位置可以跳跃的最大长度。判断你是否能够到达最后一个位置。
+
+#### 56. 合并区间
+给出一个区间的集合，请合并所有重叠的区间。
+
+#### 75. 颜色分类
+给定一个包含红色、白色和蓝色，一共 n 个元素的数组，原地对它们进行排序，使得相同颜色的元素相邻，并按照红色、白色、蓝色顺序排列。
+此题中，我们使用整数 0、 1 和 2 分别表示红色、白色和蓝色。
+注意:
+不能使用代码库中的排序函数来解决这道题。
+（使用常数空间一趟遍历解决问题）
+
+设置left和right，分别指向左端开始遇到的最后一个零的位置和右端开始遇到的最后一个2的位置，i从left开始，如果i位置元素为0且i不等于left，i和left位置元素互换，left++，right同理。
+
+
+#### 121.买卖股票的最佳时间
+给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。
+如果你最多只允许完成一笔交易（即买入和卖出一支股票），设计一个算法来计算你所能获取的最大利润。
+注意你不能在买入股票前卖出股票。
+
+
+#### 128. 最长连续序列
+给定一个未排序的整数数组，找出最长连续序列的长度。
+要求算法的时间复杂度为 O(n)。
+
 
 
 ## 数字
@@ -238,7 +264,7 @@ int LastRemaining_Solution(int n, int m)
 ```
 
 
-#### 剑指 数组中只出现一次的数字
+#### 剑指 数组中只出现一次的数字 136. 只出现一次的数字
 一个整型数组里除了两个数字之外，其他的数字都出现了两次。请写程序找出这两个只出现一次的数字。
 
 遍历异或一遍，得到两个数字的异或值temp，找到temp二进制数字中1出现的最低位index，将两个数字区分开，再遍历一遍数组，异或。
@@ -418,8 +444,11 @@ int Add(int num1, int num2)
 
 
 ## 二叉树
-#### 剑指 重建二叉树
+#### 剑指 重建二叉树   105. 从前序与中序遍历序列构造二叉树
 输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。例如输入前序遍历序列{1,2,4,7,3,5,6,8}和中序遍历序列{4,7,2,1,5,3,8,6}，则重建二叉树并返回。
+
+#### 106. 从中序与后序遍历序列构造二叉树
+
 
 #### 剑指 二叉树的下一个结点
 给定一个二叉树和其中的一个结点，请找出中序遍历顺序的下一个结点并且返回。注意，树中的结点不仅包含左右子结点，同时包含指向父结点的指针。
@@ -435,6 +464,240 @@ int Add(int num1, int num2)
 请实现一个函数按照之字形打印二叉树，即第一行按照从左到右的顺序打印，第二层按照从右至左的顺序打印，第三行按照从左到右的顺序打印，其他行以此类推。
 
 用两个栈实现
+
+#### 剑指 二叉树的最大深度 104. 二叉树的最大深度
+
+#### 114. 二叉树展开为链表
+给定一个二叉树，原地将它展开为链表。
+
+```
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    void flatten(TreeNode* root) {
+        if(!root){
+            return;
+        }
+        if(root->left){
+            flatten(root->left);
+        }
+        if(root->right)
+            flatten(root->right);
+        TreeNode *temp = root->right;
+        root->right = root->left;
+        root->left = NULL;
+        while(root->right)
+            root = root->right;
+        root->right = temp;
+    }
+};
+```
+
+#### 124. 二叉树中的最大路径和
+给定一个非空二叉树，返回其最大路径和。
+本题中，路径被定义为一条从树中任意节点出发，达到任意节点的序列。该路径至少包含一个节点，且不一定经过根节点。
+
+```
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    int maxPathSum(TreeNode* root) {
+        int res = INT_MIN;
+        dfs(root, res);
+        return res;
+    }
+    
+    int dfs(TreeNode * root, int & res){
+        if(!root){
+            return 0;
+        }
+        
+        int left = max(dfs(root->left, res), 0);
+        int right = max(dfs(root->right, res), 0);
+        
+        res = max(res, left+right+root->val);
+        return max(left, right) + root->val;
+    }
+};
+```
+
+
+#### 94. 二叉树的中序遍历
+给定一个二叉树，返回它的中序 遍历。
+
+递归
+```
+vector<int> res;
+    
+    vector<int> inorderTraversal(TreeNode* root) {
+        if(root != NULL){
+            inorderTraversal(root->left);
+            res.push_back(root->val);
+            inorderTraversal(root->right);
+        }
+        
+        return res;
+    }
+```
+
+非递归
+```
+class Solution {
+public:
+    vector<int> inorderTraversal(TreeNode* root) {
+        vector<int> res;
+        stack<TreeNode*> tempStack;
+        while(!tempStack.empty() || root != NULL){
+            if(root != NULL){
+                tempStack.push(root);
+                root = root->left;
+            }
+            else{
+                root = tempStack.top();
+                res.push_back(tempStack.top()->val);
+                tempStack.pop();
+                root = root->right;
+            }
+        }
+        
+        return res;
+    }
+};
+```
+
+#### 144. 二叉树的前序遍历
+递归：
+```
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    vector<int> res;
+    vector<int> preorderTraversal(TreeNode* root) {
+        if(root != NULL){
+            res.push_back(root->val);
+            preorderTraversal(root->left);
+            preorderTraversal(root->right);
+        }
+        
+        return res;
+    }
+};
+```
+
+非递归
+```
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    vector<int> preorderTraversal(TreeNode* root) {
+        vector<int> res;
+        stack<TreeNode*> tempStack;
+        tempStack.push(root);
+        while(!tempStack.empty()){
+            TreeNode* temp = tempStack.top();
+            tempStack.pop();
+            if(temp != NULL){
+                res.push_back(temp->val);
+                tempStack.push(temp->right);
+                tempStack.push(temp->left);
+            }
+        }
+        return res;
+    }
+};
+```
+
+#### 145. 二叉树的后序遍历
+递归：
+```
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    vector<int> res;
+    vector<int> postorderTraversal(TreeNode* root) {
+        if(root != NULL){
+            postorderTraversal(root->left);
+            postorderTraversal(root->right);
+            res.push_back(root->val);
+        }
+        
+        return res;
+    }
+};
+```
+
+
+非递归：
+```
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    vector<int> postorderTraversal(TreeNode* root) {
+        vector<int> res;
+        stack<TreeNode*> tempStack;
+        tempStack.push(root);
+        while(!tempStack.empty()){
+            TreeNode* temp = tempStack.top();
+            tempStack.pop();
+            if(temp != NULL){
+                res.insert(res.begin(), temp->val);
+                tempStack.push(temp->left);
+                tempStack.push(temp->right);
+            }
+        }
+        return res;
+    }
+};
+```
+
 
 #### 剑指 将二叉树打印成多行 层序遍历
 从上到下按层打印二叉树，同一层结点从左至右输出。每一层输出一行。
@@ -475,6 +738,31 @@ int Add(int num1, int num2)
 
 #### 剑指 二叉树的深度
 输入一棵二叉树，求该树的深度。从根结点到叶结点依次经过的结点（含根、叶结点）形成树的一条路径，最长路径的长度为树的深度。
+
+#### 98. 验证二叉搜索树
+给定一个二叉树，判断其是否是一个有效的二叉搜索树。
+
+#### 96. 不同的二叉搜索树
+给定一个整数 n，求以 1 ... n 为节点组成的二叉搜索树有多少种？
+
+```
+class Solution {
+public:
+    int numTrees(int n) {
+        int dp[n+1];
+        dp[0] = dp[1] = 1;
+        for(int i = 2; i <= n; i++){
+            dp[i] = 0;
+            for(int j = 0; j < i; j++){
+                dp[i] += dp[j] * dp[i-j-1];
+            }
+        }
+        
+        return dp[n];
+    }
+};
+```
+
 
 
 
@@ -569,6 +857,9 @@ LL今天心情特别好,因为他去买了一副扑克牌,发现里面居然有2
 
 用unordered_map<char, int>记录字符和出现次数，再从头遍历
 
+#### 76. 最小覆盖子串
+给你一个字符串 S、一个字符串 T，请在字符串 S 里面找出：包含 T 所有字母的最小子串。
+
 
 
 ## 动态规划
@@ -589,6 +880,27 @@ dp[n] = dp[n-1] + dp[n-2]
 给你一根长度为n的绳子，请把绳子剪成整数长的m段（m、n都是整数，n>1并且m>1），每段绳子的长度记为k[0],k[1],...,k[m]。请问k[0]xk[1]x...xk[m]可能的最大乘积是多少？例如，当绳子的长度是8时，我们把它剪成长度分别为2、3、3的三段，此时得到的最大乘积是18。
 
 dp[n] = max(temp, dp[i-j] * dp[j])
+
+#### 64. 最小路径和
+给定一个包含非负整数的 m x n 网格，请找出一条从左上角到右下角的路径，使得路径上的数字总和为最小。
+说明：每次只能向下或者向右移动一步。
+
+dp[i][j] = min(dp[i-1][j], dp[i][j-1]) + grid[i][j];
+
+初始化，每行直走，每列直走。
+
+#### 62. 不同的路径
+一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为“Start” ）。机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为“Finish”）。问总共有多少条不同的路径？
+
+dp[j] += dp[j-1]
+
+#### 139. 单词拆分
+给定一个非空字符串 s 和一个包含非空单词列表的字典 wordDict，判定 s 是否可以被空格拆分为一个或多个在字典中出现的单词。
+说明：
+拆分时可以重复使用字典中的单词。
+你可以假设字典中没有重复的单词。
+
+
 
 
 ## 回溯
@@ -661,6 +973,14 @@ public:
     }
 };
 ```
+
+#### 78. 子集
+给定一组不含重复元素的整数数组 nums，返回该数组所有可能的子集（幂集）。
+说明：解集不能包含重复的子集。
+
+#### 79. 单词搜索
+给定一个二维网格和一个单词，找出该单词是否存在于网格中。
+单词必须按照字母顺序，通过相邻的单元格内的字母构成，其中“相邻”单元格是那些水平相邻或垂直相邻的单元格。同一个单元格内的字母不允许被重复使用。
 
 
 ## 数据结构
